@@ -1,0 +1,164 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.csproj": {}
+  },
+  "projects": {
+    "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\BlazorAppTest.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\BlazorAppTest.Client.csproj",
+        "projectName": "BlazorAppTest.Client",
+        "projectPath": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\BlazorAppTest.Client.csproj",
+        "packagesPath": "C:\\Users\\thisurar\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thisurar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.NET.Sdk.WebAssembly.Pack": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[8.0.0, 8.0.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.csproj",
+        "projectName": "BlazorAppTest",
+        "projectPath": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.csproj",
+        "packagesPath": "C:\\Users\\thisurar\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thisurar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\BlazorAppTest.Client.csproj": {
+                "projectPath": "D:\\Personal\\Learning Projects\\Blazor Crash Course\\BlazorAppTest\\BlazorAppTest\\BlazorAppTest.Client\\BlazorAppTest.Client.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.QuickGrid": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

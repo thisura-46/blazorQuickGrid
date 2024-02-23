@@ -1,0 +1,161 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <EditForm FormName="PersonTable" Model="person" OnSubmit="AddPerson" Enhance>
+                        <div class="hstack gap-2">
+                            <label class="label-control">Fullname</label>
+                            <InputText @bind-Value="person.Name" class="form-control"></InputText>
+                            <label class="label-control">Birth Date</label>
+                            <InputDate @bind-Value="person.BirthDate" class="form-control"></InputDate>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </EditForm>
+                </div>
+                <div class="card-body">
+                    <QuickGrid Items="@Persons" Pagination="pagination">
+                        <PropertyColumn Property="@(p => p.PersonId)" Title="Person ID" Sortable="true" Align="Align.Center" />
+                        <PropertyColumn Property="@(c => c.Name)" Sortable="true" Class="country-name" Align="Align.Center">
+                            <ColumnOptions>
+                                <div class="search-box">
+                                    <input type="search" autofocus @onchange="SearchPerson" placeholder="Name..." />
+                                </div>
+                            </ColumnOptions>
+                        </PropertyColumn>
+                        <PropertyColumn Property="@(p => p.BirthDate)" Title="Birth Date" Format="yyyy-MM-dd" Sortable="true" />
+                        <PropertyColumn Title="Age in Years" Property="@(c => AgeCalculator(c.BirthDate))" Sortable="true" Align="Align.Center" />
+                        <TemplateColumn Title="Action" Align="Align.Center">
+                            <button @onclick="@(() => Edit(context))" class="btn btn-info">Edit</button>
+                            <button @onclick="@(() => Delete(context))" class="btn btn-danger">Delete</button>
+                        </TemplateColumn>
+                    </QuickGrid>
+                </div>
+                <div class="card-footer">
+                    <Paginator State="@pagination"></Paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    //Pagination
+    PaginationState pagination = new PaginationState { ItemsPerPage = 3 };
+
+    IQueryable<Person> Persons = Enumerable.Empty<Person>().AsQueryable();
+
+    [SupplyParameterFromForm]
+    Person person { get; set; } = new();
+    static List<Person> PersonList = new();
+
+    protected override void OnInitialized()
+    {
+        ConvertListToQueryable();
+    }
+
+    async Task AddPerson()
+    {
+        //Update
+        if (person.PersonId > 0)
+        {
+            var p = PersonList.FirstOrDefault(_ => _.PersonId == person.PersonId);
+            if (p is null) return;
+            PersonList.Remove(p);
+            PersonList.Add(person);
+            person = new();
+            GetDataAgain();
+            return;
+        }
+
+        //Add
+        if (person.Name is null) return;
+        person.PersonId = PersonList.Count + 1;
+        PersonList.Add(person); 
+        person = new();
+        GetDataAgain();
+        return;
+    }
+
+    // Load data from List to the Queryable container
+    private void ConvertListToQueryable()
+    {
+        if (PersonList is null) return;
+        foreach (var person in PersonList.OrderBy(_ => _.PersonId))
+        {
+            Persons = Persons.Concat(new[] { person }.AsQueryable());
+        }
+        pagination.TotalItemCountChanged += (sender, eventArgs) => StateHasChanged();
+    }
+
+    //Clear container and reload
+    void GetDataAgain()
+    {
+        Persons = Enumerable.Empty<Person>().AsQueryable();
+        ConvertListToQueryable();
+    }
+
+    void Edit(Person incomingModel)
+    {
+        person.BirthDate = incomingModel.BirthDate;
+        person = incomingModel;
+    }
+
+    void Delete(Person incomingModel)
+    {
+        PersonList.Remove(PersonList.FirstOrDefault(_ => _.PersonId == incomingModel.PersonId));
+        if (PersonList is null) return;
+        GetDataAgain();
+    }
+
+    //Name Search
+    void SearchPerson(ChangeEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(e.Value!.ToString()))
+        {
+            var result = PersonList.Where(c => c.Name!.Contains(e.Value!.ToString()!, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            Persons = Enumerable.Empty<Person>().AsQueryable();
+            if (result.Count == 0)
+            {
+                return;
+            }
+
+            if (result.Any())
+            {
+                foreach (var person in result.OrderBy(_ => _.PersonId))
+                {
+                    Persons = Persons.Concat(new[] { person }.AsQueryable());
+                }
+            }
+            return;
+        }
+        else
+        {
+            GetDataAgain();
+        }
+    }
+
+    //Calculate Age
+    int AgeCalculator(DateOnly BirthDate)
+    {
+        return DateTime.Now.Year - BirthDate.Year - (BirthDate.DayOfYear < DateTime.Now.DayOfYear ? 0 : 1);
+    }
+
+    public class Person
+    {
+        public int PersonId { get; set; }
+        public string? Name { get; set; }
+        public DateOnly BirthDate { get; set; }
+    };
+
+
+
+
+
+}
